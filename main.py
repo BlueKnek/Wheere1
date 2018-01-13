@@ -53,8 +53,8 @@ def root():
     return render_template('root.html')
 
 
-@app.route('/item_form', methods=['GET', 'POST'])
-def item_form():
+@app.route('/new_item_form', methods=['GET', 'POST'])
+def new_item_form():
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
