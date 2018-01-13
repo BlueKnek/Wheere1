@@ -2,6 +2,8 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import send_from_directory
+from flask import url_for
+from flask import redirect
 from werkzeug.utils import secure_filename
 import os
 
@@ -69,6 +71,15 @@ def new_item_form():
         return str(item.id)
     else:
         return render_template('item_form.html')
+
+
+@app.route('/item/<int:item_id>/delete', methods=['POST'])
+def delete_item(item_id):
+    session = Session()
+    item = session.query(Item).get(item_id)
+    session.delete(item)
+    session.commit()
+    return redirect(url_for('items'))
 
 
 @app.route('/items')
