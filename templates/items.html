@@ -3,18 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Items</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 </head>
 <body>
-    {% for item in items %}
-        <div>
-            <p> {{ item.name }} </p>
-            <p> {{ item.description }} </p>
-            {% if item.image_filename %}
-                <img src="{{ url_for('uploaded_image', filename=item.image_filename) }}"/>
-            {% else %}
-                <p> No image given </p>
-            {% endif %}
+    <div class="items-page">
+        {% for item in items %}
+            <div class="item">
+                <div class="item-image">
+                    {% if item.image_filename %}
+                        <img src="{{ url_for('uploaded_image', filename=item.image_filename) }}"/>
+                    {% endif %}
+                </div>
+                <div class="item-info">
+                    <div class="item-name"> {{ item.name }} </div>
+                    <div class="item-description"> {{ item.description }} </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="add-item">
+            <a href="{{ url_for('new_item_form') }}"> Add new item </a>
         </div>
-    {% endfor %}
+    </div>
 </body>
 </html>
