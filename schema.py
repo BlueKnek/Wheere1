@@ -10,6 +10,7 @@ class Item(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     description = Column(String)
+    image_filename = Column(String)
 
     def __repr__(self):
         return "<Item(name='{}')>".format(self.name)

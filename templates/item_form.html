@@ -5,9 +5,10 @@
     <title>Item form</title>
 </head>
 <body>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input name="name"/> <br/>
         <textarea name="description"></textarea> <br/>
+        <input name="image" type="file" accept="image/*" capture="camera"/><br/>
         <input type="submit" value="Submit"/>
     </form>
 </body>
