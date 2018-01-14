@@ -6,8 +6,9 @@ from flask import url_for
 from flask import redirect
 from werkzeug.utils import secure_filename
 import os
+from datetime import datetime
 
-from schema import Item
+from schema import Item, Position
 from db import Session
 
 app = Flask(__name__)
@@ -90,6 +91,27 @@ def edit_item(item_id):
         return redirect(url_for('items'))
     else:
         return render_template('item_form.html', item=item)
+
+
+@app.route('/item/<int:item_id>/new_position', methods=['POST'])
+def new_position(item_id):
+    if request.method == 'POST':
+        session = Session()
+        item = session.query(Item).get(item_id)
+
+        print(item)
+
+        name = request.form['name']
+        if 'description' in request.form:
+            description = request.form['description']
+        else:
+            description = ''
+        datetime_ = datetime.now()
+
+        item.positions.append(Position(item=item, name=name, description=description, datetime=datetime_))
+
+        session.commit()
+        return redirect(url_for('items'))
 
 
 

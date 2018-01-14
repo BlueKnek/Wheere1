@@ -54,6 +54,15 @@ body {
   font-size: 0.75em;
 }
 
+.item-position {
+  margin-top: 1em;
+  font-size: 0.75em;
+}
+
+.item-position-datetime {
+  color: gray;
+}
+
 .add-item form {
   display: flex;
   flex-direction: column;
