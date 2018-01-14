@@ -73,6 +73,26 @@ def new_item():
         return render_template('item_form.html')
 
 
+@app.route('/item/<int:item_id>/edit', methods=['GET', 'POST'])
+def edit_item(item_id):
+    session = Session()
+    item = session.query(Item).get(item_id)
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['description']
+        image_filename = save_image_if_exists()
+
+        if name: item.name = name
+        if description: item.description = description
+        if image_filename: item.image_filename = image_filename
+
+        session.commit()
+        return redirect(url_for('items'))
+    else:
+        return render_template('item_form.html', item=item)
+
+
+
 @app.route('/item/<int:item_id>/delete', methods=['POST'])
 def delete_item(item_id):
     session = Session()
