@@ -24,6 +24,7 @@ body {
 
 .item {
   display: flex;
+  overflow: hidden;
 }
 
 .item-image {
@@ -61,6 +62,22 @@ body {
 
 .item-position-datetime {
   color: gray;
+}
+
+.item-controls {
+  display: block;
+  overflow: hidden;
+
+  max-height: 1em;
+  opacity: 0.0;
+
+  transition: all 200ms;
+}
+
+.item:hover .item-controls,
+.item:focus-within .item-controls {
+  max-height: 10em;
+  opacity: 1.0;
 }
 
 .add-item form {
