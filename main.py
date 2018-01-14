@@ -55,8 +55,8 @@ def root():
     return render_template('root.html')
 
 
-@app.route('/new_item_form', methods=['GET', 'POST'])
-def new_item_form():
+@app.route('/new_item', methods=['GET', 'POST'])
+def new_item():
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
@@ -68,7 +68,7 @@ def new_item_form():
         session.add(item)
         session.commit()
 
-        return str(item.id)
+        return redirect(url_for('items'))
     else:
         return render_template('item_form.html')
 

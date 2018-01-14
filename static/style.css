@@ -3,9 +3,13 @@ body {
   background-color: #EEE;
 }
 
-.items-page {
-  margin: auto;
-  padding: 1em;
+.page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.page-column {
   max-width: 30em;
 }
 
@@ -50,6 +54,12 @@ body {
   font-size: 0.75em;
 }
 
-.add-item {
-  text-align: center
+.add-item form {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-weight: normal;
+  margin: 0;
 }
