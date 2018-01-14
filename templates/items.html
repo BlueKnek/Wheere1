@@ -18,7 +18,11 @@
                     </div>
                     <div class="item-info">
                         <div class="item-name"> {{ item.name }} </div>
-                        <div class="item-description"> {{ item.description }} </div>
+                        <div class="item-description"> 
+                            {% for line in item.description.splitlines() %}
+                                {{ line }} <br/>
+                            {% endfor %}
+                        </div>
                         {% if item.positions %}
                             <div class="item-position"> {{ item.positions[0].name }}
                                 <span class="item-position-datetime">({{ item.positions[0].datetime.strftime('%Y-%m-%d %H:%M') }})</span>
