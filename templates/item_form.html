@@ -8,6 +8,7 @@
 <body>
     <form method="post" enctype="multipart/form-data">
         <input name="name" value="{{ item and item.name }}"/><br/>
+        <input name="tags" value="{{ item and item.tags }}"/><br/>
         <textarea name="description">{{ item and item.description }}</textarea> <br/>
         <input name="image" type="file" accept="image/*" capture="camera"/><br/>
         <input type="submit" value="Submit"/>

@@ -18,6 +18,13 @@
                     </div>
                     <div class="item-info">
                         <div class="item-name"> {{ item.name }} </div>
+                        <div class="item-tags">
+                            {% for tag in item.tags.split(',') %}
+                                {% if tag %}
+                                    <span class="item-tag"> {{ tag }} </span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                         <div class="item-description"> 
                             {% for line in item.description.splitlines() %}
                                 {{ line }} <br/>
@@ -47,6 +54,7 @@
                 <h1>Add new item</h1>
                 <form action="{{ url_for('new_item') }}" method="post" enctype="multipart/form-data">
                     <input name="name"/>
+                    <input name="tags"/>
                     <textarea name="description"></textarea>
                     <input name="image" type="file" accept="image/*" capture="camera"/>
                     <input type="submit" value="Submit"/>

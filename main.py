@@ -58,9 +58,17 @@ def new_item():
 
         name = request.form['name']
         description = request.form['description']
+        tags = request.form['tags']
         image_filename = save_image_if_exists()
 
-        item = Item(name=name, description=description, image_filename=image_filename, created=created, updated=created)
+        item = Item(
+            name=name,
+            description=description,
+            tags=tags,
+            image_filename=image_filename,
+            created=created,
+            updated=created,
+        )
 
         session = Session()
         session.add(item)
@@ -80,10 +88,12 @@ def edit_item(item_id):
 
         name = request.form['name']
         description = request.form['description']
+        tags = request.form['tags']
         image_filename = save_image_if_exists()
 
-        if name: item.name = name
-        if description: item.description = description
+        item.name = name
+        item.description = description
+        item.tags = tags
         if image_filename: item.image_filename = image_filename
         item.updated = updated
 

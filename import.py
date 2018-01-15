@@ -16,6 +16,13 @@ def datetime_from_json(json, name, default):
         return default
 
 
+def get(json, name, default):
+    if name in json:
+        return json[name]
+    else:
+        return default
+
+
 def import_json(json):
     session = Session()
     for item_json in json['items']:
@@ -36,6 +43,7 @@ def import_json(json):
         item = Item(
             name=item_json['name'],
             description=item_json['description'],
+            tags=get(item_json, 'tags', ''),
             image_filename=item_json['image_filename'],
             created=datetime_from_json(item_json, 'created', now),
             updated=datetime_from_json(item_json, 'updated', now),
