@@ -14,6 +14,7 @@ class Item(Base):
     description = Column(String)
     image_filename = Column(String)
     is_place = Column(Boolean)
+    tags = Column(String)
 
     created = Column(DateTime)
     updated = Column(DateTime)
