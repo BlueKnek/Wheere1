@@ -59,11 +59,13 @@ def root():
 @app.route('/new_item', methods=['GET', 'POST'])
 def new_item():
     if request.method == 'POST':
+        created = datetime.now()
+
         name = request.form['name']
         description = request.form['description']
         image_filename = save_image_if_exists()
 
-        item = Item(name=name, description=description, image_filename=image_filename)
+        item = Item(name=name, description=description, image_filename=image_filename, created=created, updated=created)
 
         session = Session()
         session.add(item)
@@ -79,6 +81,8 @@ def edit_item(item_id):
     session = Session()
     item = session.query(Item).get(item_id)
     if request.method == 'POST':
+        updated = datetime.now()
+
         name = request.form['name']
         description = request.form['description']
         image_filename = save_image_if_exists()
@@ -86,6 +90,7 @@ def edit_item(item_id):
         if name: item.name = name
         if description: item.description = description
         if image_filename: item.image_filename = image_filename
+        item.updated = updated
 
         session.commit()
         return redirect(url_for('items'))
@@ -96,6 +101,8 @@ def edit_item(item_id):
 @app.route('/item/<int:item_id>/new_position', methods=['POST'])
 def new_position(item_id):
     if request.method == 'POST':
+        created = datetime.now()
+
         session = Session()
         item = session.query(Item).get(item_id)
 
@@ -108,7 +115,8 @@ def new_position(item_id):
             description = ''
         datetime_ = datetime.now()
 
-        item.positions.append(Position(item=item, name=name, description=description, datetime=datetime_))
+        item.positions.append(Position(item=item, name=name, description=description, datetime=datetime_,
+            created=created, updated=created))
 
         session.commit()
         return redirect(url_for('items'))

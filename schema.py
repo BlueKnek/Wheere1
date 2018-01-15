@@ -14,6 +14,9 @@ class Item(Base):
     description = Column(String)
     image_filename = Column(String)
 
+    created = Column(DateTime)
+    updated = Column(DateTime)
+
     def __repr__(self):
         return "<Item(name='{}')>".format(self.name)
 
@@ -25,6 +28,9 @@ class Position(Base):
     name = Column(String)
     description = Column(String)
     datetime = Column(DateTime)
+
+    created = Column(DateTime)
+    updated = Column(DateTime)
 
     item_id = Column(Integer, ForeignKey('item.id'))
     item = relationship('Item', back_populates='positions')
