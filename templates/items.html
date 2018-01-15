@@ -25,17 +25,17 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <div class="item-description"> 
-                            {% for line in item.description.splitlines() %}
-                                {{ line }} <br/>
-                            {% endfor %}
-                        </div>
                         {% if item.positions %}
                             <div class="item-position"> {{ item.positions[0].name }}
                                 <span class="item-position-datetime">({{ item.positions[0].datetime.strftime('%Y-%m-%d %H:%M') }})</span>
                             </div>
                         {% endif %}
                         <div class="item-controls">
+                            <div class="item-description">
+                                {% for line in item.description.splitlines() %}
+                                    {{ line }} <br/>
+                                {% endfor %}
+                            </div>
                             <a href="{{ url_for('edit_item', item_id=item.id) }}"> edit </a>
                             <form action="{{ url_for('delete_item', item_id=item.id) }}" method="post">
                                 <button type="submit"> Delete </button>

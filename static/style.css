@@ -62,11 +62,11 @@ body {
 }
 
 .item-description {
+  margin-top: 1em;
   font-size: 0.75em;
 }
 
 .item-position {
-  margin-top: 1em;
   font-size: 0.75em;
 }
 
