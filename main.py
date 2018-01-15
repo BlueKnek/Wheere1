@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory, url_for, redirect
+from flask import Flask, render_template, request, send_from_directory, url_for, redirect, jsonify
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime
@@ -132,3 +132,31 @@ def items():
     session = Session()
     items = session.query(Item).all()
     return render_template('items.html', items=items)
+
+
+@app.route('/export.json')
+def export_json():
+    session = Session()
+    items = session.query(Item).all()
+    json = {}
+    json_items = []
+    json['items'] = json_items
+    for item in items:
+        json_items.append({
+            'name': item.name,
+            'description': item.description,
+            'image_filename': item.image_filename,
+
+            'created': str(item.created),
+            'updated': str(item.updated),
+
+            'positions': [{
+                'name': position.name,
+                'description': position.description,
+                'datetime': str(position.datetime),
+
+                'created': str(position.created),
+                'updated': str(position.updated),
+            } for position in reversed(item.positions)]
+        })
+    return jsonify(json)
